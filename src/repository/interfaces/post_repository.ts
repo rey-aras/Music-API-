@@ -1,6 +1,6 @@
-import { SQLRepo } from '@archisdi/zuu';
-import PostModel, { PostProperties } from '../../entity/models/post_model';
+import { SQLRepository } from 'rey-common';
+import { PostProperties } from '../../typings/models/post';
 
-export type PostRepository = SQLRepo<PostModel, PostProperties>
+export type PostRepository = SQLRepository<PostProperties>
 
 export default PostRepository;

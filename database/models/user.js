@@ -1,6 +1,6 @@
-const { DBContext } = require('@archisdi/zuu');
+const { SQLContext } = require('rey-common');
 
-const { Model, DataTypes } = DBContext.getORMProvider();
+const { Model, DataTypes } = SQLContext.getORMProvider();
 
 class User extends Model {}
 
@@ -50,7 +50,7 @@ User.init({
     allowNull: true,
   }
 }, {
-    sequelize: DBContext.getContext(),
+    sequelize: SQLContext.getContext(),
     underscored: true,
     paranoid: true,
     tableName: 'users'

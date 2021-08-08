@@ -1,7 +1,7 @@
-import { SQLRepo } from '@archisdi/zuu';
-import UserModel, { UserProperties } from '../../entity/models/user_model';
+import { SQLRepository } from 'rey-common';
+import { UserProperties } from '../../typings/models/user';
 
-export interface UserRepository extends SQLRepo<UserModel, UserProperties> {
+export interface UserRepository extends SQLRepository<UserProperties> {
     getTotalUser(): Promise<number>
 }
 

@@ -1,10 +1,10 @@
-import { SQLRepo } from '@archisdi/zuu';
-import { UserModel, UserProperties } from '../entity/models/user_model';
+import { SQLRepository } from 'rey-common';
+import { UserProperties } from '../typings/models/user';
 import { UserRepository } from './interfaces/user_repository';
 
-export class UserRepositoryImpl extends SQLRepo<UserModel, UserProperties> implements UserRepository {
+export class UserRepositoryImpl extends SQLRepository<UserProperties> implements UserRepository {
     public constructor() {
-        super(UserModel);
+        super('User');
     }
 
     public async getTotalUser(): Promise<number> {

@@ -1,4 +1,4 @@
-import { OutboundService } from '@archisdi/zuu';
+import { OutboundService } from 'rey-common';
 import Person from '../typings/outbound/person';
 import StarwarsOutboundService from './interfaces/starwars_outbound_service';
 

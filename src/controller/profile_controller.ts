@@ -1,8 +1,6 @@
 import { Context } from 'src/typings/common';
-import { Controller as BaseController, RequestData } from '@archisdi/zuu';
+import { Controller as BaseController, JWTMiddleware, RequestData } from 'rey-common';
 import API_ROUTE from '../entity/constant/api_route';
-import CLEARANCE from '../entity/constant/clearance';
-import AuthMiddleware from '../middleware/jwt_auth';
 import StarwarsOutboundService from '../service/interfaces/starwars_outbound_service';
 import UserService from '../service/interfaces/user_service';
 
@@ -11,12 +9,12 @@ export default class ProfileController extends BaseController {
         private userService: UserService,
         private starWarsOutboundService: StarwarsOutboundService
     ) {
-        super({ path: API_ROUTE.PROFILE, middleware: AuthMiddleware(CLEARANCE.ADMIN) });
+        super({ path: API_ROUTE.PROFILE, middleware: JWTMiddleware });
     }
 
     public async getProfile(data: RequestData, context: Context): Promise<any> {
         const user = await this.userService.getUser(context.user_id);
-        return user.toJson({ removeHidden: true });
+        return user;
     }
 
     public async getStarwarsProfile(data: RequestData, context: Context): Promise<any> {

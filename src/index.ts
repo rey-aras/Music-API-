@@ -1,7 +1,7 @@
 import * as env from 'dotenv';
 import App from './app';
 
-/**  */
+/** main */
 (async (): Promise<void> => {
     /** load envs */
     env.config();

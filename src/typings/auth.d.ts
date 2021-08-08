@@ -4,7 +4,7 @@ export interface RefreshToken {
 }
 
 export interface Tokenable {
-    user_id: string;
+    user_id: number;
     username: string;
     clearance: number;
 }

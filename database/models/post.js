@@ -1,8 +1,8 @@
 const {
-    DBContext
-} = require('@archisdi/zuu');
+    SQLContext
+} = require('rey-common');
 
-const { Model, DataTypes } = DBContext.getORMProvider();
+const { Model, DataTypes } = SQLContext.getORMProvider();
 
 class Post extends Model {}
 
@@ -38,7 +38,7 @@ Post.init({
         allowNull: true
     }
 }, {
-    sequelize: DBContext.getContext(),
+    sequelize: SQLContext.getContext(),
     underscored: true,
     paranoid: true,
     tableName: 'posts'

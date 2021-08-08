@@ -1,8 +1,8 @@
-import { HttpError, Service } from '@archisdi/zuu';
+import { HttpError, Service } from 'rey-common';
 import Auth from '../utility/auth';
-import UserModel from '../entity/models/user_model';
 import UserRepository from '../repository/interfaces/user_repository';
 import UserService from './interfaces/user_service';
+import { UserProperties } from '../typings/models/user';
 
 export class UserServiceImpl extends Service implements UserService {
 
@@ -26,9 +26,9 @@ export class UserServiceImpl extends Service implements UserService {
         user.refresh_token = refreshToken;
         user.token_validity = valid_until;
 
-        await this.userRepository.save(user);
+        await this.userRepository.create(user);
 
-        const { lifetime, token } = Auth.generateToken({ user_id: user.id, username: user.username, clearance: user.clearance });
+        const { lifetime, token } = Auth.generateToken({ user_id: user.id as number, username: user.username, clearance: user.clearance });
 
         return {
             token,
@@ -37,7 +37,7 @@ export class UserServiceImpl extends Service implements UserService {
         };
     }
 
-    public async getUser(id: string): Promise<UserModel> {
+    public async getUser(id: string): Promise<UserProperties> {
         const user = await this.userRepository.findOne({ id });
         if (!user) {
             throw new HttpError.NotFoundError('user not found', 'USER_NOT_FOUND');

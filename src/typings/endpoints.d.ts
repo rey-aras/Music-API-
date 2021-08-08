@@ -25,5 +25,5 @@ export interface UpdatePostRequest {
 }
 
 export interface UpdatePostResponse {
-    id: string;
+    id: string | number;
 }
