@@ -18,7 +18,6 @@ RUN cp -a ./database ./build
 
 # release
 FROM node:12-alpine as release
-COPY --from=builder ./usr/src/app/cluster.json ./
 COPY --from=builder ./usr/src/app/build ./build
 
 EXPOSE 3020
