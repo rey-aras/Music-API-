@@ -26,8 +26,6 @@ export class UserServiceImpl extends Service implements UserService {
         user.refresh_token = refreshToken;
         user.token_validity = valid_until;
 
-        await this.userRepository.create(user);
-
         const { lifetime, token } = Auth.generateToken({ user_id: user.id as number, username: user.username, clearance: user.clearance });
 
         return {

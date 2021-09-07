@@ -1,8 +1,8 @@
 {
-  "name": "elise",
+  "name": "rey-default-svc-ts",
   "version": "2.1.0",
   "description": "rest api made with node, express, and typescript",
-  "repository": "https://github.com/archisdi/elise",
+  "repository": "https://github.com/REY-ID/rey-default-svc-ts",
   "main": "index.js",
   "scripts": {
     "start": "nodemon",
@@ -42,7 +42,8 @@
     "pg": "^8.6.0",
     "randomstring": "^1.1.5",
     "uuid": "^3.3.2",
-    "rey-common": "git@github.com:REY-ID/rey-common.git"
+    "rey-common": "git@github.com:REY-ID/rey-common.git",
+    "rey-common-model": "git@github.com:REY-ID/rey-common-model.git"
   },
   "ava": {
     "babel": {
