@@ -2,7 +2,7 @@ import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import * as moment from 'moment';
 import * as random from 'randomstring';
-import { RefreshToken, Tokenable } from '../typings/auth';
+import { RefreshToken, Tokenable } from '../entity/dto/auth';
 
 export default class Auth {
     private static SALT = 10;

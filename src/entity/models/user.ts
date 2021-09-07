@@ -1,7 +1,7 @@
 import { BaseProps } from 'rey-common';
 import { PostProperties } from './post';
 
-interface UserProperties extends BaseProps {
+export interface UserProperties extends BaseProps {
     name: string;
     username: string;
     password: string;

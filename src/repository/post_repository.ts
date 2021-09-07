@@ -1,11 +1,6 @@
 import { SQLRepository } from 'rey-common';
-import { PostProperties } from '../typings/models/post';
-import PostRepository from './interfaces/post_repository';
+import { PostProperties } from '../entity/models/post';
 
-export class PostRepositoryImpl extends SQLRepository<PostProperties> implements PostRepository {
-    public constructor() {
-        super('Post');
-    }
-}
+export type PostRepository = SQLRepository<PostProperties>
 
-export default PostRepositoryImpl;
+export default PostRepository;

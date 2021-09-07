@@ -1,23 +1,12 @@
-import { Service } from 'rey-common';
-import PostRepository from '../repository/interfaces/post_repository';
-import { Context } from '../typings/common';
-import { PostProperties } from '../typings/models/post';
-import PostService from './interfaces/post_service';
+import { Context, Page, Service } from 'rey-common';
+import { PostProperties } from '../entity/models/post';
 
-export class PostServiceImpl extends Service implements PostService {
-
-    constructor(
-        private postRepository: PostRepository
-    ){
-        super();
-    }
-
-    public async findPost(id: string, context: Context): Promise<PostProperties> {
-        return await this.postRepository.findOneOrFail({
-            author_id: context.user_id,
-            id
-        });
-    }
+export interface PostService extends Service {
+    findPost(id: string, context: Context): Promise<PostProperties>;
+    // pagePost(context: Context): Promise<Page<Partial<PostProperties>>>;
+    // createPost(data: PostProperties): Promise<PostModel>;
+    // updatePost(id: string, data: PostProperties): Promise<PostModel>;
+    // deletePost(id: string): Promise<void>;
 }
 
-export default PostServiceImpl;
+export default PostService;

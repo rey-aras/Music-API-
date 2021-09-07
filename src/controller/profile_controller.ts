@@ -1,8 +1,7 @@
-import { Context } from 'src/typings/common';
-import { Controller as BaseController, JWTMiddleware, RequestData } from 'rey-common';
-import API_ROUTE from '../entity/constant/api_route';
-import StarwarsOutboundService from '../service/interfaces/starwars_outbound_service';
-import UserService from '../service/interfaces/user_service';
+import { Context, Controller as BaseController, JWTMiddleware, RequestData } from 'rey-common';
+import API_ROUTE from '../entity/constant/api';
+import StarwarsOutboundService from '../outbound/starwars_outbound_service';
+import UserService from '../service/user_service';
 
 export default class ProfileController extends BaseController {
     public constructor(

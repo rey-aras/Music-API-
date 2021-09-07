@@ -2,10 +2,10 @@ import { App as BaseApp, SQLContext, RedisContext } from 'rey-common';
 import AuthController from './controller/auth_controller';
 import PostController from './controller/post_controller';
 import ProfileController from './controller/profile_controller';
-import PostRepositoryImpl from './repository/post_repository';
-import UserRepositoryImpl from './repository/user_repository';
-import StarwarsOutboundServiceImpl from './service/starwars_outbound_service';
-import UserServiceImpl from './service/user_service';
+import PostRepositoryImpl from './repository/impl/post_repository_impl';
+import UserRepositoryImpl from './repository/impl/user_repository_impl';
+import StarwarsOutboundServiceImpl from './outbound/impl/starwars_outbound_service_impl';
+import UserServiceImpl from './service/impl/user_service_impl';
 
 class App extends BaseApp {
     public constructor(port: number) {

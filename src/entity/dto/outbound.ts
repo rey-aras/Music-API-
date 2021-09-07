@@ -16,5 +16,3 @@ export interface Person {
     edited: Date;
     url: string;
 }
-
-export default Person;

@@ -1,6 +1,6 @@
 import { OutboundService } from 'rey-common';
-import Person from '../typings/outbound/person';
-import StarwarsOutboundService from './interfaces/starwars_outbound_service';
+import { Person } from '../../entity/dto/outbound';
+import StarwarsOutboundService from '../starwars_outbound_service';
 
 export class StarwarsOutboundServiceImpl extends OutboundService implements StarwarsOutboundService {
     constructor(){
