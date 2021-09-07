@@ -1,7 +1,7 @@
 import { LoginReponse, LoginRequest } from 'src/entity/dto/endpoints';
 import { Context, Controller as BaseController } from 'rey-common';
-import { SCHEME } from '../utility/validator';
-import UserService from '../service/user_service';
+import { SCHEME } from '../entity/validation/common';
+import UserService from '../services/user_service';
 import API_ROUTE from '../entity/constant/api';
 
 export default class AuthController extends BaseController {

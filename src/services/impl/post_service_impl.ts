@@ -1,5 +1,5 @@
 import { Context, Service } from 'rey-common';
-import PostRepository from '../../repository/post_repository';
+import PostRepository from '../../repositories/post_repository';
 import { PostProperties } from '../../entity/models/post';
 import PostService from '../post_service';
 

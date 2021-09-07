@@ -1,7 +1,7 @@
 import { Context, Controller as BaseController, JWTMiddleware, RequestData } from 'rey-common';
 import API_ROUTE from '../entity/constant/api';
 import StarwarsOutboundService from '../outbound/starwars_outbound_service';
-import UserService from '../service/user_service';
+import UserService from '../services/user_service';
 
 export default class ProfileController extends BaseController {
     public constructor(

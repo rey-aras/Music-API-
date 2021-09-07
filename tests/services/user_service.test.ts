@@ -1,8 +1,7 @@
 import test from 'ava';
 import * as sinon from 'sinon';
-import UserService from '../../src/service/user_service';
-import UserRepository from '../../src/repository/user_repository';
-import User from '../../src/entity/models/user_model';
+import UserService from '../../src/services/impl/user_service_impl';
+import UserRepository from '../../src/repositories/impl/user_repository_impl';
 import { HttpError } from 'rey-common';
 
 test.beforeEach('Initialize New Sandbox Before Each Test', (t: any): void => {
@@ -16,8 +15,8 @@ test.afterEach.always('Restore Sandbox and Configuration After Each Test', (t: a
 test.serial('SUCCESS, getUser case user found', async (t: any): Promise<void> => {
     const userRepository = new UserRepository();
     const userService = new UserService(userRepository);
-    const user = new User({
-        id: 'id',
+    const user = {
+        id: 1,
         name: 'archie',
         clearance: 5,
         username: 'archie',
@@ -26,11 +25,11 @@ test.serial('SUCCESS, getUser case user found', async (t: any): Promise<void> =>
         refresh_token: '',
         created_at: '',
         updated_at: '',
-    });
+    };
 
     const mockRepository = t.context.sandbox.mock(userRepository).expects('findOne').resolves(user);
 
-    await userService.getUser('id')
+    await userService.getUser(1)
         .then(response => {
             t.true(mockRepository.called);
             t.is(response, user);
@@ -43,8 +42,8 @@ test.serial('FAIL, getUser case user not found', async (t: any): Promise<void> =
 
     const mockRepository = t.context.sandbox.mock(userRepository).expects('findOne').resolves(null);
 
-    await userService.getUser('id')
-        .then(response => {
+    await userService.getUser(1)
+        .then(() => {
             t.fail();
         })
         .catch(err => {

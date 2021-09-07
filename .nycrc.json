@@ -1,7 +1,0 @@
-{
-  "extension": [".ts"],
-  "exclude": ["**/*.d.ts", "src/models", "src/middlewares", "src/repositories"],
-  "include": ["src/**"],
-  "reporter": ["html", "text"],
-  "all": true
-}

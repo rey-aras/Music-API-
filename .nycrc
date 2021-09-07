@@ -1,0 +1,7 @@
+{
+  "extension": [".ts"],
+  "exclude": [],
+  "include": ["src/controllers/**","src/services/**","src/utility/**", "src/subscribers/**"],
+  "reporter": ["html", "text"],
+  "all": true
+}

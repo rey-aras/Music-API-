@@ -1,6 +1,6 @@
 import { HttpError, Service } from 'rey-common';
 import Auth from '../../utility/auth';
-import UserRepository from '../../repository/user_repository';
+import UserRepository from '../../repositories/user_repository';
 import UserService from '../user_service';
 import { UserProperties } from '../../entity/models/user';
 
