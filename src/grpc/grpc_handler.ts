@@ -1,13 +1,13 @@
-import { GrpcHandler } from 'rey-common';
+import { GrpcService } from 'rey-common';
 import { ReyDefaultDefinition, ReyDefaultHandlers, ReyDefaultProtoGrpcType } from 'rey-common-model';
 import { PROTO_FILE_PATH } from '../entity/constant/api';
 import UserRepository from '../repositories/user_repository';
 
-export class ReyDefaultGrpcHandler extends GrpcHandler<ReyDefaultHandlers, ReyDefaultProtoGrpcType> {
+export class ReyDefaultGrpcHandler extends GrpcService<ReyDefaultHandlers, ReyDefaultProtoGrpcType> {
     constructor(
         private userRepo: UserRepository
     ) {
-        super(PROTO_FILE_PATH);
+        super({ proto_path: PROTO_FILE_PATH });
     }
 
     getHandlers(): ReyDefaultHandlers {
