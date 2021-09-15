@@ -1,6 +1,6 @@
 import { UpdatePostRequest, UpdatePostResponse } from 'src/entity/dto/endpoints';
 import { Controller as BaseController, SQLContext, RequestData, JWTMiddleware, Context } from 'rey-common';
-import API_ROUTE from '../entity/constant/api';
+import { API_ROUTE } from '../entity/constant/api';
 import { PostDetail, PostList } from '../entity/mapper/post_mapper';
 import { SCHEME } from '../entity/validation/common';
 import PostRepository from '../repositories/post_repository';

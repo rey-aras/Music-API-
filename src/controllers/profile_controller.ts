@@ -1,5 +1,5 @@
 import { Context, Controller as BaseController, JWTMiddleware, RequestData } from 'rey-common';
-import API_ROUTE from '../entity/constant/api';
+import { API_ROUTE } from '../entity/constant/api';
 import StarwarsOutboundService from '../outbound/starwars_outbound_service';
 import UserService from '../services/user_service';
 

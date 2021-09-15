@@ -6,10 +6,11 @@ import PostRepositoryImpl from './repositories/impl/post_repository_impl';
 import UserRepositoryImpl from './repositories/impl/user_repository_impl';
 import StarwarsOutboundServiceImpl from './outbound/impl/starwars_outbound_service_impl';
 import UserServiceImpl from './services/impl/user_service_impl';
+import ReyDefaultGrpcHandler from './grpc/grpc_handler';
 
 class App extends BaseApp {
     public constructor(port: number) {
-        super(port);
+        super(port, false, true);
     }
 
     public async initProviders(): Promise<void> {
@@ -33,6 +34,9 @@ class App extends BaseApp {
         this.addController(new AuthController(userService));
         this.addController(new ProfileController(userService, starwarsService));
         this.addController(new PostController(new PostRepositoryImpl()));
+
+        /** Register GrpcHandler */
+        this.addGrpcHandler(new ReyDefaultGrpcHandler(new UserRepositoryImpl));
     }
 }
 
