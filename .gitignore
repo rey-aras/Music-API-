@@ -20,3 +20,4 @@ storage/*
 !storage/.gitkeep
 
 .vscode
+package-lock.json
