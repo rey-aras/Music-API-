@@ -7,12 +7,6 @@ export interface LoginRequest {
     params: Record<string, unknown>;
 }
 
-export interface LoginReponse {
-    token: string;
-    refresh_token: string;
-    expires_in: number;
-}
-
 export interface UpdatePostRequest {
     body: {
         title?: string;
