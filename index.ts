@@ -1,5 +1,5 @@
 import * as env from 'dotenv';
-import App from './app';
+import App from './src/app';
 
 /** main */
 (async (): Promise<void> => {
