@@ -1,9 +1,9 @@
 {
   "extension": [".ts"],
-  "exclude": [],
-  "include": ["src/controllers/**","src/services/**","src/utility/**", "src/subscribers/**", "src/grpc/**", "src/outbound/**"],
+  "include": ["src/**"],
+  "exclude": ["src/repositories", "src/outbound", "src/entity", "src/app.ts"],
   "reporter": ["html", "text"],
   "all": true,
   "check-coverage": true,
-  "lines": 90
+  "lines": 50
 }
