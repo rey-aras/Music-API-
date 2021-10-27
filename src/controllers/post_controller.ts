@@ -5,7 +5,7 @@ import { PostDetail, PostList } from '../entity/mapper/post_mapper';
 import { SCHEME } from '../entity/validation/common';
 import PostRepository from '../repositories/post_repository';
 
-export default class PostController extends BaseController {
+export class PostController extends BaseController {
     public constructor(
         private postRepository: PostRepository
     ) {
@@ -54,3 +54,5 @@ export default class PostController extends BaseController {
         this.addRoute('put', '/:id', this.updatePost.bind(this), { validate: SCHEME.UPDATE_POST });
     }
 }
+
+export default PostController;

@@ -3,7 +3,7 @@ import UserService from '../services/user_service';
 import { API_ROUTE } from '../entity/constant/api';
 import ReyDefaultOutboundService from '../outbound/rey_default_outbound_service';
 
-export default class AuthController extends BaseController {
+export class AuthController extends BaseController {
 
     public constructor(
         private userService: UserService,
@@ -24,3 +24,5 @@ export default class AuthController extends BaseController {
         this.addRoute('get', '/check-username/:username', this.checkUsername.bind(this));
     }
 }
+
+export default AuthController;

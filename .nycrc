@@ -1,7 +1,7 @@
 {
   "extension": [".ts"],
   "exclude": [],
-  "include": ["src/controllers/**","src/services/**","src/utility/**", "src/subscribers/**"],
+  "include": ["src/controllers/**","src/services/**","src/utility/**", "src/subscribers/**", "src/grpc/**", "src/outbound/**"],
   "reporter": ["html", "text"],
   "all": true,
   "check-coverage": true,

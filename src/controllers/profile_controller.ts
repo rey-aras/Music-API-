@@ -3,7 +3,7 @@ import { API_ROUTE } from '../entity/constant/api';
 import StarwarsOutboundService from '../outbound/starwars_outbound_service';
 import UserService from '../services/user_service';
 
-export default class ProfileController extends BaseController {
+export class ProfileController extends BaseController {
     public constructor(
         private userService: UserService,
         private starWarsOutboundService: StarwarsOutboundService
@@ -29,8 +29,7 @@ export default class ProfileController extends BaseController {
         /** router level caching */
         this.addRoute('get', '/', this.getProfile.bind(this), { cache: true });
         this.addRoute('get', '/starwars/:id', this.getStarwarsProfile.bind(this));
-
-        /** nested controllers */
-        // this.addChildController(Controller);
     }
 }
+
+export default ProfileController;
