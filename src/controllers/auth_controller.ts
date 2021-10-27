@@ -1,12 +1,10 @@
 import { Context, Controller as BaseController, RequestData } from 'rey-common';
-import UserService from '../services/user_service';
 import { API_ROUTE } from '../entity/constant/api';
 import ReyDefaultOutboundService from '../outbound/rey_default_outbound_service';
 
 export class AuthController extends BaseController {
 
     public constructor(
-        private userService: UserService,
         private reyDefaultOutboundService: ReyDefaultOutboundService
     ) {
         super({ path: API_ROUTE.AUTH });

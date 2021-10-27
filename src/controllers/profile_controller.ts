@@ -27,7 +27,7 @@ export class ProfileController extends BaseController {
 
     public setRoutes(): void {
         /** router level caching */
-        this.addRoute('get', '/', this.getProfile.bind(this), { cache: true });
+        this.addRoute('get', '/', this.getProfile.bind(this));
         this.addRoute('get', '/starwars/:id', this.getStarwarsProfile.bind(this));
     }
 }

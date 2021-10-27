@@ -12,7 +12,7 @@ test.afterEach.always('Restore Sandbox and Configuration After Each Test', (t: a
     t.context.sandbox.restore();
 });
 
-test.serial('SUCCESS, getUser case user found', async (t: any): Promise<void> => {
+test.serial('should successfully return expected user', async (t: any): Promise<void> => {
     const userRepository = new UserRepository();
     const userService = new UserService(userRepository);
     const user = {
@@ -36,7 +36,7 @@ test.serial('SUCCESS, getUser case user found', async (t: any): Promise<void> =>
         });
 });
 
-test.serial('FAIL, getUser case user not found', async (t: any): Promise<void> => {
+test.serial('should throw error if user not found', async (t: any): Promise<void> => {
     const userRepository = new UserRepository();
     const userService = new UserService(userRepository);
 

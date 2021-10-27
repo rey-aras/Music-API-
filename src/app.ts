@@ -10,10 +10,6 @@ import ReyDefaultGrpcHandler from './grpc/grpc_handler';
 import ReyDefaultOutboundImpl from './outbound/impl/rey_default_grpc_outbound_impl';
 
 class App extends BaseApp {
-    public constructor(port: number) {
-        super(port, false, true);
-    }
-
     public async initProviders(): Promise<void> {
         SQLContext.initialize({
             connection_string: String(process.env.DB_CONNECTION_STRING),
@@ -32,9 +28,9 @@ class App extends BaseApp {
         const starwarsService = new StarwarsOutboundServiceImpl;
 
         /** Register Controller */
-        this.addController(new AuthController(userService, new ReyDefaultOutboundImpl));
+        this.addController(new AuthController(new ReyDefaultOutboundImpl));
         this.addController(new ProfileController(userService, starwarsService));
-        this.addController(new PostController(new PostRepositoryImpl()));
+        this.addController(new PostController(new PostRepositoryImpl));
 
         /** Register GrpcService */
         this.addGrpcService(new ReyDefaultGrpcHandler(new UserRepositoryImpl));
