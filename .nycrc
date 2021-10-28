@@ -1,5 +1,6 @@
 {
   "extension": [".ts"],
+  "require": ["ts-node/register/transpile-only"],
   "include": ["src"],
   "exclude": ["src/repositories", "src/outbound", "src/entity", "src/app.ts"],
   "reporter": ["html", "text"],
