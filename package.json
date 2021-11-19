@@ -3,7 +3,6 @@
   "version": "2.1.0",
   "description": "rest api made with node, express, and typescript",
   "repository": "https://github.com/REY-ID/rey-default-svc-ts",
-  "main": "index.js",
   "scripts": {
     "start": "nodemon",
     "clean-install": "rm -rf node_modules package-lock.json && npm install",
