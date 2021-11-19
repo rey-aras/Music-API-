@@ -1,0 +1,19 @@
+# name: Pull Request Check
+# on: pull_request
+# jobs:
+#   build:
+#     name: unit-test
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v2
+#       with:
+#         persist-credentials: false
+#     - uses: webfactory/ssh-agent@v0.5.3
+#       with:
+#         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+#     - name: Use Node.js 12
+#       uses: actions/setup-node@v2
+#       with:
+#         node-version: '12'
+#     - run: npm install
+#     - run: npm test

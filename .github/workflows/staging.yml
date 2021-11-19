@@ -1,0 +1,45 @@
+# name: Build Staging
+# on: workflow_dispatch
+# jobs:
+#   build-registry:
+#     runs-on: ubuntu-latest
+#     env:
+#       PROJECT_ID: reyinfra
+#       PROJECT_NUMBER: 481152137866
+#       SVC_NAME: rey-purchase
+#       SVC_ACC_NAME: service-account
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Declare variable
+#         id: vars
+#         shell: bash
+#         run: |
+#           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+#       - uses: google-github-actions/setup-gcloud@master
+#         with:
+#           project_id: ${{ env.PROJECT_ID }}
+#           service_account_key: ${{ secrets.GCLOUD_SERVICE_KEY_STAGING }}
+#           export_default_credentials: true
+#       - id: secrets
+#         uses: google-github-actions/get-secretmanager-secrets@main
+#         with:
+#           secrets: |-
+#             token:${{ env.PROJECT_NUMBER }}/${{ env.SVC_NAME }}
+#             svc_acc:${{ env.PROJECT_NUMBER }}/${{ env.SVC_ACC_NAME }}
+#       - name: Create env file
+#         env:
+#          ENV_FILE: ${{ steps.secrets.outputs.token }}
+#         run: echo $ENV_FILE | tr " " "\n" > .env
+#       - name: Create service account file
+#         env:
+#          SVC_ACC_FILE: ${{ steps.secrets.outputs.svc_acc }}
+#         run: echo $SVC_ACC_FILE > svc_account.json
+#       - name: Build and Push
+#         uses: RafikFarhad/push-to-gcr-github-action@v3.0.2
+#         with:
+#           gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY_STAGING }}
+#           registry: asia.gcr.io
+#           project_id: ${{ env.PROJECT_ID }}
+#           image_name: ${{ env.SVC_NAME }}
+#           image_tag: latest,${{ steps.vars.outputs.sha_short }}
+#           dockerfile: ./Dockerfile
