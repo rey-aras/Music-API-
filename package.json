@@ -34,7 +34,7 @@
     "joi": "~17.4.0",
     "moment": "~2.29.1",
     "pg": "~8.6.0",
-    "rey-common": "git@github.com:REY-ID/rey-common.git#v1.3.3",
+    "rey-common": "git@github.com:REY-ID/rey-common.git",
     "rey-common-model": "git@github.com:REY-ID/rey-common-model.git",
     "uuid": "~8.3.2"
   },

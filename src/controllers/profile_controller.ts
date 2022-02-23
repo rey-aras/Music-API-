@@ -8,7 +8,7 @@ export class ProfileController extends BaseController {
         private userService: UserService,
         private starWarsOutboundService: StarwarsOutboundService
     ) {
-        super({ path: API_ROUTE.PROFILE, middleware: JWTMiddleware });
+        super({ path: API_ROUTE.PROFILE });
     }
 
     public async getProfile(data: RequestData, context: Context): Promise<any> {
@@ -18,11 +18,7 @@ export class ProfileController extends BaseController {
 
     public async getStarwarsProfile(data: RequestData, context: Context): Promise<any> {
         const person = await this.starWarsOutboundService.getPersonById(data.params.id);
-        return {
-            name: person.name,
-            height: person.height,
-            mass: person.mass,
-        };
+        return person;
     }
 
     public setRoutes(): void {

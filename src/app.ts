@@ -6,8 +6,6 @@ import PostRepositoryImpl from './repositories/impl/post_repository_impl';
 import UserRepositoryImpl from './repositories/impl/user_repository_impl';
 import StarwarsOutboundServiceImpl from './outbound/impl/starwars_outbound_service_impl';
 import UserServiceImpl from './services/impl/user_service_impl';
-import ReyDefaultGrpcHandler from './grpc/grpc_handler';
-import ReyDefaultOutboundImpl from './outbound/impl/rey_default_grpc_outbound_impl';
 
 class App extends BaseApp {
     public async initProviders(): Promise<void> {
@@ -28,12 +26,9 @@ class App extends BaseApp {
         const starwarsService = new StarwarsOutboundServiceImpl;
 
         /** Register Controller */
-        this.addController(new AuthController(new ReyDefaultOutboundImpl));
+        this.addController(new AuthController);
         this.addController(new ProfileController(userService, starwarsService));
         this.addController(new PostController(new PostRepositoryImpl));
-
-        /** Register GrpcService */
-        this.addGrpcService(new ReyDefaultGrpcHandler(new UserRepositoryImpl));
     }
 }
 

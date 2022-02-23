@@ -1,20 +1,17 @@
 import { Context, Controller as BaseController, RequestData } from 'rey-common';
 import { API_ROUTE } from '../entity/constant/api';
-import ReyDefaultOutboundService from '../outbound/rey_default_outbound_service';
 
 export class AuthController extends BaseController {
 
-    public constructor(
-        private reyDefaultOutboundService: ReyDefaultOutboundService
-    ) {
+    public constructor() {
         super({ path: API_ROUTE.AUTH });
     }
 
     public async checkUsername(data: RequestData, context: Context): Promise<any> {
-        const isExist = await this.reyDefaultOutboundService.checkUsername(data.params.username);
+        // call service
         return {
             username: data.params.username,
-            is_exist: isExist
+            is_exist: true
         };
     }
 

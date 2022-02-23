@@ -1,5 +1,5 @@
 import { UpdatePostRequest, UpdatePostResponse } from 'src/entity/dto/endpoints';
-import { Controller as BaseController, SQLContext, RequestData, JWTMiddleware, Context } from 'rey-common';
+import { Controller as BaseController, SQLContext, RequestData, JWTMiddleware, Context, ResponseData } from 'rey-common';
 import { API_ROUTE } from '../entity/constant/api';
 import { PostDetail, PostList } from '../entity/mapper/post_mapper';
 import { SCHEME } from '../entity/validation/common';
@@ -12,7 +12,7 @@ export class PostController extends BaseController {
         super({ path: API_ROUTE.POST, middleware: JWTMiddleware });
     }
 
-    public async createPost(data: RequestData, context: Context): Promise<{ id: string }> {
+    public async createPost(data: RequestData, context: Context): Promise<any> {
         const post = await this.postRepository.create({
             ...data.body,
             author_id: context.user_id
@@ -34,7 +34,7 @@ export class PostController extends BaseController {
         return post;
     }
 
-    public async updatePost(data: UpdatePostRequest, context: Context): Promise<UpdatePostResponse> {
+    public async updatePost(data: UpdatePostRequest, context: Context): Promise<any> {
         const { body } = data;
 
         const post = await this.postRepository.findOneOrFail({ id: data.params.id, author_id: String(context.user_id) });
@@ -50,7 +50,7 @@ export class PostController extends BaseController {
     public setRoutes(): void {
         this.addRoute('post', '/', this.createPost.bind(this), { validate: SCHEME.CREATE_POST });
         this.addRoute('get', '/', this.getPostList.bind(this));
-        this.addRoute('get', '/:id', this.getPostDetail.bind(this), { cache: true });
+        this.addRoute('get', '/:id', this.getPostDetail.bind(this));
         this.addRoute('put', '/:id', this.updatePost.bind(this), { validate: SCHEME.UPDATE_POST });
     }
 }

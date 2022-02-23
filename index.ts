@@ -10,7 +10,7 @@ import App from './src/app';
     const port = Number(process.env.APP_PORT);
 
     /** instantiate and start server  */
-    const app = new App(port, false, true);
+    const app = new App({ port });
     await app.initialize();
     app.start();
 })();
