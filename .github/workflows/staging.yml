@@ -1,45 +1,71 @@
-# name: Build Staging
-# on: workflow_dispatch
-# jobs:
-#   build-registry:
-#     runs-on: ubuntu-latest
-#     env:
-#       PROJECT_ID: reyinfra
-#       PROJECT_NUMBER: 481152137866
-#       SVC_NAME: rey-purchase
-#       SVC_ACC_NAME: service-account
-#     steps:
-#       - uses: actions/checkout@v2
-#       - name: Declare variable
-#         id: vars
-#         shell: bash
-#         run: |
-#           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-#       - uses: google-github-actions/setup-gcloud@master
-#         with:
-#           project_id: ${{ env.PROJECT_ID }}
-#           service_account_key: ${{ secrets.GCLOUD_SERVICE_KEY_STAGING }}
-#           export_default_credentials: true
-#       - id: secrets
-#         uses: google-github-actions/get-secretmanager-secrets@main
-#         with:
-#           secrets: |-
-#             token:${{ env.PROJECT_NUMBER }}/${{ env.SVC_NAME }}
-#             svc_acc:${{ env.PROJECT_NUMBER }}/${{ env.SVC_ACC_NAME }}
-#       - name: Create env file
-#         env:
-#          ENV_FILE: ${{ steps.secrets.outputs.token }}
-#         run: echo $ENV_FILE | tr " " "\n" > .env
-#       - name: Create service account file
-#         env:
-#          SVC_ACC_FILE: ${{ steps.secrets.outputs.svc_acc }}
-#         run: echo $SVC_ACC_FILE > svc_account.json
-#       - name: Build and Push
-#         uses: RafikFarhad/push-to-gcr-github-action@v3.0.2
-#         with:
-#           gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY_STAGING }}
-#           registry: asia.gcr.io
-#           project_id: ${{ env.PROJECT_ID }}
-#           image_name: ${{ env.SVC_NAME }}
-#           image_tag: latest,${{ steps.vars.outputs.sha_short }}
-#           dockerfile: ./Dockerfile
+name: Deploy Staging
+on: workflow_dispatch
+jobs:
+  build-registry:
+    runs-on: ubuntu-latest
+    env:
+      PROJECT_ID: reyinfra
+      PROJECT_NUMBER: 481152137866
+      SVC_NAME: rey-default-svc-ts
+      SVC_ACC_NAME: service-account
+      SVC_ACC_KEY: ${{ secrets.GCLOUD_SERVICE_KEY_STAGING }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Declare variable
+        id: vars
+        shell: bash
+        run: |
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+      - uses: google-github-actions/setup-gcloud@v0
+        with:
+          project_id: ${{ env.PROJECT_ID }}
+          service_account_key: ${{ env.SVC_ACC_KEY }}
+          export_default_credentials: true
+
+      - id: secrets
+        uses: google-github-actions/get-secretmanager-secrets@main
+        with:
+          secrets: |-
+            token:${{ env.PROJECT_NUMBER }}/${{ env.SVC_NAME }}
+            svc_acc:${{ env.PROJECT_NUMBER }}/${{ env.SVC_ACC_NAME }}
+
+      - name: Create env file
+        env:
+         ENV_FILE: ${{ steps.secrets.outputs.token }}
+        run: echo $ENV_FILE | tr " " "\n" > .env
+
+      - name: Create service account file
+        env:
+         SVC_ACC_FILE: ${{ steps.secrets.outputs.svc_acc }}
+        run: echo $SVC_ACC_FILE > svc_account.json
+
+      - name: Build and Push
+        uses: RafikFarhad/push-to-gcr-github-action@v3.0.2
+        with:
+          gcloud_service_key: ${{ env.SVC_ACC_KEY }}
+          registry: asia.gcr.io
+          project_id: ${{ env.PROJECT_ID }}
+          image_name: ${{ env.SVC_NAME }}
+          image_tag: latest,${{ steps.vars.outputs.sha_short }}
+          dockerfile: ./Dockerfile
+
+      - name: Checkout infra repository
+        uses: actions/checkout@v2
+        with:
+          repository: REY-ID/rey-infra-image
+          path: infrastructure
+          token: ${{ secrets.PAT }}
+
+      - name: Update service image tag
+        uses: fjogeleit/yaml-update-action@v0.6.1
+        with:
+          repository: REY-ID/rey-infra-image
+          valueFile: ${{ env.SVC_NAME }}/values.yaml
+          propertyPath: 'image.tag'
+          value: "${{ steps.vars.outputs.sha_short }}"
+          message: update ${{ env.SVC_NAME }} image tag to ${{ steps.vars.outputs.sha_short }}
+          createPr: false
+          workDir: infrastructure
+          token: ${{ secrets.PAT }}

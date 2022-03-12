@@ -1,6 +1,6 @@
 {
   "name": "rey-default-svc-ts",
-  "version": "2.1.0",
+  "version": "0.0.0",
   "description": "rest api made with node, express, and typescript",
   "repository": "https://github.com/REY-ID/rey-default-svc-ts",
   "scripts": {
