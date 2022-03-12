@@ -67,8 +67,7 @@ jobs:
         echo "::set-output name=tag::${GITHUB_REF#refs/*/}"
 
     - name: create release
-      uses: "marvinpinto/action-automatic-releases@latest"
+      uses: "marvinpinto/action-automatic-releases@v1.2.1"
       with:
         repo_token: "${{ secrets.PAT }}"
-        automatic_release_tag: "${{ steps.vars.outputs.tag }}"
         prerelease: false
