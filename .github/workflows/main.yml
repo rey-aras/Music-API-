@@ -60,12 +60,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Declare variable
-      id: vars
-      shell: bash
-      run: |
-        echo "::set-output name=tag::${GITHUB_REF#refs/*/}"
-
     - name: create release
       uses: "marvinpinto/action-automatic-releases@v1.2.1"
       with:
