@@ -7,6 +7,7 @@ on:
 env:
   PROJECT_ID: reyid-310002
   PROJECT_NUMBER: 525431198450
+  ARGO_REPO: REY-ID/rey-prod-image
   SVC_NAME: rey-default-svc-ts
   SVC_ACC_NAME: service-account
   SVC_ACC_KEY: ${{ secrets.GCLOUD_SERVICE_KEY_PRODUCTION }}
@@ -58,14 +59,14 @@ jobs:
       - name: Checkout argo repository
         uses: actions/checkout@v2
         with:
-          repository: REY-ID/rey-prod-image
+          repository: ${{ env.ARGO_REPO }}
           path: infrastructure
           token: ${{ secrets.PAT }}
 
       - name: Update service image tag
         uses: fjogeleit/yaml-update-action@v0.6.1
         with:
-          repository: REY-ID/rey-prod-image
+          repository: ${{ env.ARGO_REPO }}
           valueFile: ${{ env.SVC_NAME }}/values.yaml
           propertyPath: 'image.tag'
           value: "${{ steps.vars.outputs.tag }}"
