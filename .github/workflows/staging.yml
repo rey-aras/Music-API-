@@ -52,17 +52,6 @@ jobs:
           image_tag: latest,${{ steps.vars.outputs.sha_short }}
           dockerfile: ./Dockerfile
 
-  update-argo-version:
-    name: update-argo-version
-    needs: build-registry
-    runs-on: ubuntu-latest
-    steps:
-      - name: Declare variable
-        id: vars
-        shell: bash
-        run: |
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-
       - name: Checkout argo repository
         uses: actions/checkout@v2
         with:

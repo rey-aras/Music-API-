@@ -55,29 +55,6 @@ jobs:
           image_tag: ${{ steps.vars.outputs.tag }}
           dockerfile: ./Dockerfile
 
-  publish-release:
-    name: publish-release
-    needs: build-registry
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: create release
-      uses: "marvinpinto/action-automatic-releases@v1.2.1"
-      with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        prerelease: false
-
-  update-argo-version:
-    name: update-argo-version
-    needs: build-registry
-    runs-on: ubuntu-latest
-    steps:
-      - name: Declare variable
-        id: vars
-        shell: bash
-        run: |
-          echo "::set-output name=tag::${GITHUB_REF#refs/*/}"
-
       - name: Checkout argo repository
         uses: actions/checkout@v2
         with:
@@ -96,3 +73,16 @@ jobs:
           createPr: false
           workDir: infrastructure
           token: ${{ secrets.PAT }}
+
+
+  publish-release:
+    name: publish-release
+    needs: build-registry
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: create release
+      uses: "marvinpinto/action-automatic-releases@v1.2.1"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        prerelease: false
