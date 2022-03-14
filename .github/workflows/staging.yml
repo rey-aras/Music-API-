@@ -57,6 +57,11 @@ jobs:
     needs: build-registry
     runs-on: ubuntu-latest
     steps:
+      - name: Declare variable
+        id: vars
+        shell: bash
+        run: |
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
       - name: Checkout argo repository
         uses: actions/checkout@v2
