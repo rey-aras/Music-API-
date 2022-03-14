@@ -63,5 +63,5 @@ jobs:
     - name: create release
       uses: "marvinpinto/action-automatic-releases@v1.2.1"
       with:
-        repo_token: "${{ secrets.PAT }}"
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
         prerelease: false
