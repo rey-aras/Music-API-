@@ -1,17 +1,18 @@
 name: Deploy Staging
 on: workflow_dispatch
+
+env:
+  PROJECT_ID: reyinfra
+  PROJECT_NUMBER: 481152137866
+  SVC_NAME: rey-default-svc-ts
+  SVC_ACC_NAME: service-account
+  SVC_ACC_KEY: ${{ secrets.GCLOUD_SERVICE_KEY_STAGING }}
+
 jobs:
   build-registry:
     runs-on: ubuntu-latest
-    env:
-      PROJECT_ID: reyinfra
-      PROJECT_NUMBER: 481152137866
-      SVC_NAME: rey-default-svc-ts
-      SVC_ACC_NAME: service-account
-      SVC_ACC_KEY: ${{ secrets.GCLOUD_SERVICE_KEY_STAGING }}
     steps:
       - uses: actions/checkout@v2
-
       - name: Declare variable
         id: vars
         shell: bash
