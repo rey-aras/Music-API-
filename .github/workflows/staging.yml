@@ -51,7 +51,13 @@ jobs:
           image_tag: latest,${{ steps.vars.outputs.sha_short }}
           dockerfile: ./Dockerfile
 
-      - name: Checkout infra repository
+  update-argo-version:
+    name: update-argo-version
+    needs: build-registry
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout argo repository
         uses: actions/checkout@v2
         with:
           repository: REY-ID/rey-infra-image
