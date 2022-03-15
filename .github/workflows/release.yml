@@ -19,4 +19,4 @@ jobs:
       - name: create tag
         uses: rickstaa/action-create-tag@v1.2.2
         with:
-          tag: ${{ steps.package-version.outputs.current-version }}
+          tag: "v${{ steps.package-version.outputs.current-version }}"
