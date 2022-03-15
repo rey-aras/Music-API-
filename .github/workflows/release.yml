@@ -9,16 +9,16 @@ jobs:
     # if: ${GITHUB_REF##*/} == 'release'
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.PAT }}
 
-      - name: get-npm-version
+      - name: Get npm version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.1.0
 
-      - name: create tag
+      - name: Create new tag
         uses: rickstaa/action-create-tag@v1.2.2
         with:
           tag: "v${{ steps.package-version.outputs.current-version }}"
