@@ -6,7 +6,7 @@ on:
 
 jobs:
   release-tag:
-    if: github.head_ref == 'release'
+    if: GITHUB_REF##*/ == 'release'
     runs-on: ubuntu-latest
     steps:
       - name: checkout
