@@ -15,7 +15,7 @@ jobs:
           token: ${{ secrets.PAT }}
 
       - name: echo
-        run: echo '${{ github }}'
+        run: echo ${{ github.base_ref }}
 
       - name: Get npm version
         id: package-version
