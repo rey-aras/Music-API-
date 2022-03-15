@@ -2,20 +2,16 @@ name: Create Release Tag
 on:
   push:
     branches:
-      - 'master'
+      - 'release'
 
 jobs:
   release-tag:
-    # if: ${GITHUB_REF##*/} == 'release'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.PAT }}
-
-      - name: echo
-        run: echo "im from $GITHUB_HEAD_REF"
 
       - name: Get npm version
         id: package-version
@@ -25,3 +21,10 @@ jobs:
         uses: rickstaa/action-create-tag@v1.2.2
         with:
           tag: "v${{ steps.package-version.outputs.current-version }}"
+
+      - name: Merge release to master
+        uses: devmasx/merge-branch@v1.4.0
+        with:
+          type: now
+          target_branch: master
+          github_token: ${{ secrets.PAT }}
