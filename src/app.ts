@@ -29,6 +29,8 @@ class App extends BaseApp {
         this.addController(new AuthController);
         this.addController(new ProfileController(userService, starwarsService));
         this.addController(new PostController(new PostRepositoryImpl));
+
+        /** a sublte changes... */
     }
 }
 
