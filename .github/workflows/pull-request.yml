@@ -3,7 +3,7 @@ on: pull_request
 jobs:
   unit-test:
     name: unit-test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
       with:
@@ -27,7 +27,7 @@ jobs:
   # quality-gate:
   #   name: quality-gate
   #   needs: unit-test
-  #   runs-on: ubuntu-latest
+  #   runs-on: ubuntu-20.04
   #   steps:
   #   - uses: actions/checkout@v2
   #     with:
