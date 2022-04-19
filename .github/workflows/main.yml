@@ -14,7 +14,7 @@ env:
 
 jobs:
   build-registry:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: Declare variable
@@ -78,7 +78,7 @@ jobs:
   publish-release:
     name: publish-release
     needs: build-registry
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
 
     - name: create release
