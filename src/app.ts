@@ -1,11 +1,7 @@
 import { App as BaseApp, SQLContext, RedisContext } from 'rey-common';
-import AuthController from './controllers/auth_controller';
-import PostController from './controllers/post_controller';
-import ProfileController from './controllers/profile_controller';
-import PostRepositoryImpl from './repositories/impl/post_repository_impl';
-import UserRepositoryImpl from './repositories/impl/user_repository_impl';
-import StarwarsOutboundServiceImpl from './outbound/impl/starwars_outbound_service_impl';
-import UserServiceImpl from './services/impl/user_service_impl';
+import MusicController from './controllers/music_controller';
+import MusicServiceImpl from './services/impl/music_service_impl';
+import MusicRepositoryImpl from './repositories/impl/music_repository_impl';
 
 class App extends BaseApp {
     public async initProviders(): Promise<void> {
@@ -20,15 +16,13 @@ class App extends BaseApp {
 
     public async initControllers(): Promise<void> {
         /** initiate services */
-        const userService = new UserServiceImpl(
-            new UserRepositoryImpl()
+        const musicRepo = new MusicRepositoryImpl();
+        const musicService = new MusicServiceImpl(
+            musicRepo
         );
-        const starwarsService = new StarwarsOutboundServiceImpl;
 
         /** Register Controller */
-        this.addController(new AuthController);
-        this.addController(new ProfileController(userService, starwarsService));
-        this.addController(new PostController(new PostRepositoryImpl));
+        this.addController(new MusicController(musicService));
 
         /** a sublte changes... */
     }
